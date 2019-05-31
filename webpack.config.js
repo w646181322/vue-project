@@ -3,6 +3,7 @@ const path = require('path')
 // 启用热更新 第2步
 const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 
 module.exports = {
@@ -25,7 +26,8 @@ module.exports = {
     new htmlWebpackPlugin({// 创建一个 在内存中生成的 HTML 页面的插件
       template: path.join(__dirname,'./src/index.html'),//指定 模板页面，将来会根据指定页面的路径，去生成内存中的页面
       filename: 'index.html'// 指定生成页面的名称
-    })
+    }),
+    new VueLoaderPlugin()
   ],
   module: {// 这个节点 ， 用于配置 所有第三方模板 加载器
     rules: [// 所有第三方模板的匹配规则
@@ -36,12 +38,13 @@ module.exports = {
       // limit 给定的值 ，是图片的大小，单位是byte ， 如果我们引用的图片大于或等于 给定的limit值，则不会转化为base64格式
       // 如果图片大小 小于给定的limit 值，则会被转化为 base64的字符串
       {test: /\.(ttf|eot|svg|woff|woff2)$/,use: 'url-loader'},// 处理 字体文件的 loader
-      // {test: /\.js$/, use: 'babel-loader', exclude:/node_modules/}// 配置 babel 来转化高级的 ES 语法
+      {test: /\.js$/, use: 'babel-loader', exclude:/node_modules/},// 配置 babel 来转化高级的 ES 语法
+      {test: /\.vue$/, use: 'vue-loader'}
     ]
   },
   resolve: {
     alias: { // 修改 Vue 被导入时候的包的路径
-      // "vue$": "vue/dist/vue.js"
+      "vue$": "vue/dist/vue.js"
 
     }
   }
