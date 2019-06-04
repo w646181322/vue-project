@@ -1,10 +1,7 @@
 <template>
   <div class="app-container">
     <!-- 顶部 Header 区域 -->
-    <header id="header" class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">导航栏</h1>
-    </header>
+    <mt-header fixed title="固定在顶部"></mt-header>
 
     <!-- 中间的 路由 router-view 区域 -->
     <transition mode='out-in'>
